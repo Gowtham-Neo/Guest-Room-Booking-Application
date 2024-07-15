@@ -5,7 +5,7 @@ import Header from './Header';
 import Footer from '../Home/Footer';
 import backgroundImage from '../../assets/images/Hero.webp'; // Replace with your actual background image path
 import { MdDescription } from "react-icons/md";
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 
 const GuestRoomBooking = () => {

@@ -8,7 +8,7 @@ import VerifiedRooms from "../../assets/images/VerifiedRooms.avif"
 import EasyBooking from "../../assets/images/EasyBooking.webp"
 import CustomerSupport from "../../assets/images/CustomerSupport.webp"
 import Footer from "./Footer"
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
   
 
 
@@ -33,6 +33,7 @@ function Home() {
             });
             const data = await response.json();
             console.log("Fetched CSRF token:", data.csrfToken);
+            console.log(BACKEND_URL);
             localStorage.setItem('csrfToken', data.csrfToken);
         } catch (error) {
             console.error("Error fetching CSRF token:", error);

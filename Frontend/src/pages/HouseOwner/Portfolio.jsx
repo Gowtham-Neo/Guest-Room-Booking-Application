@@ -5,7 +5,7 @@ import { FaHome, FaDollarSign, FaBed, FaCalendarAlt, FaUserFriends, FaChartLine 
 import { MdDashboardCustomize } from "react-icons/md";
 import { BsGraphUpArrow } from "react-icons/bs";
 import classNames from "classnames";
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 const Portfolio = () => {
   const [portfolioDetails, setPortfolioDetails] = useState(null);

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaBed, FaRulerCombined, FaClipboardList, FaCalendarAlt,FaRupeeSign, FaDollarSign, FaRegFileAlt, FaUsers, FaStar,FaArrowLeft,FaArrowRight } from 'react-icons/fa';
 import Header from "../House/Header"
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 const parseParamsFromURL = (pathname) => {
   const parts = pathname.split('/');

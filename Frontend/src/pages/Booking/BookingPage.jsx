@@ -9,7 +9,7 @@ import { FaRupeeSign } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdDescription } from "react-icons/md";
 import Footer from "../Home/Footer"
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 const BookingPage = () => {
   const { roomId } = useParams();
