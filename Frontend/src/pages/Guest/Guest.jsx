@@ -5,6 +5,9 @@ import Header from './Header';
 import Footer from '../Home/Footer';
 import backgroundImage from '../../assets/images/Hero.webp'; // Replace with your actual background image path
 import { MdDescription } from "react-icons/md";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+
 const GuestRoomBooking = () => {
   const [houses, setHouses] = useState([]);
   const [rooms, setRooms] = useState([]);
@@ -20,7 +23,7 @@ const GuestRoomBooking = () => {
 
   const fetchHouses = async () => {
     try {
-      const response = await fetch('http://localhost:5000/house');
+      const response = await fetch(`${BACKEND_URL}/house`);
       const data = await response.json();
       setHouses(data);
       setCurrentImageIndexH(data.reduce((acc, house) => ({ ...acc, [house.id]: 0 }), {}));
@@ -31,7 +34,7 @@ const GuestRoomBooking = () => {
 
   const fetchRooms = async () => {
     try {
-      const response = await fetch('http://localhost:5000/rooms');
+      const response = await fetch(`${BACKEND_URL}/rooms`);
       const data = await response.json();
       setRooms(data);
       setCurrentImageIndexR(data.reduce((acc, room) => ({ ...acc, [room.id]: 0 }), {}));
@@ -112,7 +115,7 @@ const GuestRoomBooking = () => {
                     <div className="relative h-64 mb-4">
                       {house.photos && house.photos.length > 0 && (
                         <img
-                          src={`http://localhost:5000${house.photos[currentImageIndexH[house.id]]}`}
+                          src={`${BACKEND_URL}${house.photos[currentImageIndexH[house.id]]}`}
                           alt={house.house_name}
                           className="object-cover w-full h-full rounded"
                         />
@@ -157,7 +160,7 @@ const GuestRoomBooking = () => {
                     <div className="relative h-64 mb-4">
                       {room.photos && room.photos.length > 0 && (
                         <img
-                          src={`http://localhost:5000${room.photos[currentImageIndexR[room.id]]}`}
+                          src={`${BACKEND_URL}${room.photos[currentImageIndexR[room.id]]}`}
                           alt={room.room_name}
                           className="object-cover w-full h-full rounded"
                         />

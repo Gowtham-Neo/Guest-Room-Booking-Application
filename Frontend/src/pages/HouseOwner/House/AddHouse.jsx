@@ -103,7 +103,7 @@ const AddHouse = ({ isOpen, onClose, onAddHouse }) => {
                         <div className="mb-4">
                           <label className="block text-sm font-bold text-gray-700">Rating</label>
                           <input
-                            type="number"
+                            type="string"
                             name="rating"
                             placeholder="Rating"
                             value={rating}

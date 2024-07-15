@@ -1,6 +1,7 @@
 import React, { useState , useContext} from "react";
 import { useNavigate } from "react-router-dom";
 import signup from "../../assets/images/signup.avif";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const HoSignupForm = () => {
   const [email, setEmail] = useState("");
@@ -21,7 +22,7 @@ const HoSignupForm = () => {
     const csrfToken = localStorage.getItem('csrfToken');
     console.log(csrfToken)
     try {
-      const response = await fetch(`http://localhost:5000/Ho/signup`, {
+      const response = await fetch(`${BACKEND_URL}/Ho/signup`, {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",

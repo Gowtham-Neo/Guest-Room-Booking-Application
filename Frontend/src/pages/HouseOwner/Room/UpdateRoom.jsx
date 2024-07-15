@@ -242,7 +242,7 @@ const UpdateRoom = ({ isOpen, onClose, onUpdateRoom, ownerId, initialRoomData })
                             <div className="flex flex-col">
                               <label htmlFor="rating" className="mb-2 font-medium text-gray-700">Rating</label>
                               <input
-                                type="number"
+                                type="string"
                                 id="rating"
                                 value={rating}
                                 onChange={(e) => setRating(e.target.value)}

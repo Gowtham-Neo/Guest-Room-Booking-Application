@@ -1,0 +1,183 @@
+{
+    "HouseOwner": [
+      {
+        "id": 1,
+        "email": "Gowtham@gmail.com",
+        "password": "123456789",
+        "number": "9944170244"
+      },
+      {
+        "id": 2,
+        "email": "Thennavan@gmail.com",
+        "password": "123456789",
+        "number": "123456789"
+
+      }
+    ],
+    "Customer":[
+        {
+            "id": 3,
+            "email": "Ranga@gmail.com",
+            "password": "123456789",
+            "number": "123456987"
+        }
+    ],
+    "Houses": [
+        {
+            "id": 3,
+            "owner_id": 1,
+            "house_name": "Ocean View Villa",
+            "address": "123 Seaside Ave, Beach City",
+            "photos": [
+                "/uploads/house/hosue15.jpg",
+                "/uploads/house/house13.jpg",
+                "/uploads/house/house14.jpg"
+            ],
+            "rating": 3.4,
+            "description": "A beautiful villa with a stunning ocean view.",
+            "createdAt": "2024-07-15T10:59:06.221Z",
+            "updatedAt": "2024-07-15T10:59:06.221Z"
+        },
+        {
+            "id": 4,
+            "owner_id": 1,
+            "house_name": "Cozy Cottage",
+            "address": "456 Oak Street, Forest Town",
+            "photos": [
+                "/uploads/house/house1.jpg",
+                "/uploads/house/house2.webp",
+                "/uploads/house/house3.webp"
+            ],
+            "rating": 4.5,
+            "description": "A quaint cottage nestled in a peaceful forest setting.",
+            "createdAt": "2024-07-15T11:41:43.610Z",
+            "updatedAt": "2024-07-15T11:41:43.610Z"
+        },
+        {
+            "id": 5,
+            "owner_id": 3,
+            "house_name": "Beachfront Villa",
+            "address": "123 Sandy Beach Road, Seaside Town",
+            "photos": [
+                "/uploads/house/hosue5.jpg",
+                "/uploads/house/house4.jpg",
+                "/uploads/house/house6.jpg"
+            ],
+            "rating": 4.5,
+            "description": "A luxurious villa right on the beach with private access.",
+            "createdAt": "2024-07-15T11:57:34.361Z",
+            "updatedAt": "2024-07-15T11:57:34.361Z"
+        }
+    ],
+    "Rooms": [
+        {
+            "id": 3,
+            "house_id": 3,
+            "owner_id": 1,
+            "photos": [
+                "/uploads/room/room1.jpg",
+                "/uploads/room/room2.jpeg",
+                "/uploads/room/room3.jpg"
+            ],
+            "room_name": "Garden Room",
+            "max_guest": 2,
+            "floor_size": "30",
+            "beds_count": "1",
+            "amenities": [
+                "Wifi",
+                " Ac",
+                " AirCondition",
+                " Mini Bar",
+                " Sea View"
+            ],
+            "min_stay": 1,
+            "max_stay": 5,
+            "rent_amount": "900",
+            "description": "A cozy room with a beautiful garden view.",
+            "rating": 4.7,
+            "createdAt": "2024-07-15T11:17:10.097Z",
+            "updatedAt": "2024-07-15T11:17:10.097Z"
+        },
+        {
+            "id": 4,
+            "house_id": 3,
+            "owner_id": 1,
+            "photos": [
+                "/uploads/room/room4.jpg",
+                "/uploads/room/room5.jpg",
+                "/uploads/room/room6.jpg"
+            ],
+            "room_name": "Ocean Suite",
+            "max_guest": 4,
+            "floor_size": "45.5",
+            "beds_count": "2",
+            "amenities": [
+                "Wifi",
+                " Ac",
+                " AirCondition",
+                " Mini Bar",
+                " Sea View",
+                "Tv"
+            ],
+            "min_stay": 2,
+            "max_stay": 14,
+            "rent_amount": "1500",
+            "description": "A spacious suite with a breathtaking view of the ocean",
+            "rating": 4.9,
+            "createdAt": "2024-07-15T11:36:59.567Z",
+            "updatedAt": "2024-07-15T11:36:59.567Z"
+        },
+        {
+            "id": 5,
+            "house_id": 4,
+            "owner_id": 1,
+            "photos": [
+                "/uploads/room/room7.jpg",
+                "/uploads/room/room8.avif",
+                "/uploads/room/room9.jpg"
+            ],
+            "room_name": "Forest Retreat",
+            "max_guest": 2,
+            "floor_size": "35",
+            "beds_count": "1",
+            "amenities": [
+                "Wi-Fi",
+                " Air Conditioning",
+                " Private Terrace",
+                " Minibar"
+            ],
+            "min_stay": 1,
+            "max_stay": 30,
+            "rent_amount": "2000",
+            "description": "A cozy room with a view of the forest.",
+            "rating": 4.7,
+            "createdAt": "2024-07-15T11:46:02.756Z",
+            "updatedAt": "2024-07-15T11:46:02.756Z"
+        }
+    ],
+    "Bookings": [
+        {
+            "id": 1,
+            "customer_id": 1,
+            "room_id": 2,
+            "check_in_date": "2024-07-15T00:00:00.000Z",
+            "check_out_date": "2024-07-17T00:00:00.000Z",
+            "total_amount": "1500",
+            "booking_status": true,
+            "createdAt": "2024-07-15T10:40:42.374Z",
+            "updatedAt": "2024-07-15T10:40:42.374Z"
+        },
+        {
+            "id": 2,
+            "customer_id": 1,
+            "room_id": 7,
+            "check_in_date": "2024-07-15T00:00:00.000Z",
+            "check_out_date": "2024-07-18T00:00:00.000Z",
+            "total_amount": "2500",
+            "booking_status": true,
+            "createdAt": "2024-07-15T12:13:15.445Z",
+            "updatedAt": "2024-07-15T12:13:15.445Z"
+        }
+  ]
+
+}

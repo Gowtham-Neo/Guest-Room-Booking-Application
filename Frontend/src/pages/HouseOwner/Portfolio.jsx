@@ -5,6 +5,8 @@ import { FaHome, FaDollarSign, FaBed, FaCalendarAlt, FaUserFriends, FaChartLine 
 import { MdDashboardCustomize } from "react-icons/md";
 import { BsGraphUpArrow } from "react-icons/bs";
 import classNames from "classnames";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Portfolio = () => {
   const [portfolioDetails, setPortfolioDetails] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -21,7 +23,7 @@ const Portfolio = () => {
 
   const fetchPortfolioDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/Ho/portfolio/${owner_id}`);
+      const response = await fetch(`${BACKEND_URL}/Ho/portfolio/${owner_id}`);
       const data = await response.json();
       setPortfolioDetails(data.portfolio);
       setLoading(false);

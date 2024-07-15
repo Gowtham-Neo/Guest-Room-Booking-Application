@@ -5,6 +5,9 @@ import Footer from '../Home/Footer';
 import { MdPermIdentity } from "react-icons/md";
 import { FaRupeeSign } from "react-icons/fa";
 import { IoMdCheckmark } from "react-icons/io";
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const BookingDetails = () => {
 const [bookings, setBookings] = useState([]);
 const customer_id = JSON.parse(localStorage.getItem('user-customer')).id;
@@ -15,7 +18,7 @@ const customer_id = JSON.parse(localStorage.getItem('user-customer')).id;
 
   const fetchBookings = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/booking/guest/${customer_id}`);
+      const response = await fetch(`${BACKEND_URL}/booking/guest/${customer_id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch bookings');
       }

@@ -8,6 +8,7 @@ import Header from './Header';
 import { FaLocationDot } from "react-icons/fa6";
 import { MdDescription } from "react-icons/md";
 import Footer from "../../Home/Footer"
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const HouseDetails = () => {
   const { houseId } = useParams();
@@ -24,7 +25,7 @@ const HouseDetails = () => {
 
   const fetchHouseAndRoomDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/house/houseview/${houseId}`);
+      const response = await fetch(`${BACKEND_URL}/house/houseview/${houseId}`);
       const data = await response.json();
       setHouse(data.house);
       setRooms(data.rooms);
@@ -72,7 +73,7 @@ const HouseDetails = () => {
       <div className="relative ml-12 mr-12 h-3/6">
         {house.photos && house.photos.length > 0 && (
           <img
-            src={`http://localhost:5000${house.photos[currentImageIndexH]}`}
+            src={`${BACKEND_URL}${house.photos[currentImageIndexH]}`}
             alt={house.house_name}
             className="object-cover w-full h-96"
           />
@@ -100,13 +101,15 @@ const HouseDetails = () => {
         </div>
 
         <div className="mt-8">
+          
           <h3 className="mb-4 text-2xl font-bold">Rooms</h3>
+          
           {rooms.map((room) => (
             <div key={room.id} className="p-4 mb-8 border rounded shadow-2xl">
               <div className="relative mb-4 h-96">
                 {room.photos && room.photos.length > 0 && (
                   <img
-                    src={`http://localhost:5000${room.photos[currentImageIndexR[room.id]]}`}
+                    src={`${BACKEND_URL}${room.photos[currentImageIndexR[room.id]]}`}
                     alt={room.room_name}
                     className="object-cover w-full h-full rounded"
                   />
@@ -138,6 +141,7 @@ const HouseDetails = () => {
               </div>
             </div>
           ))}
+          {rooms.length==0 && <p className='text-xl font-bold'>No Rooms Available!</p>}
         </div>
       </div>
       <Footer/>

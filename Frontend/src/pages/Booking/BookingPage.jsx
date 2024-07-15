@@ -9,6 +9,8 @@ import { FaRupeeSign } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdDescription } from "react-icons/md";
 import Footer from "../Home/Footer"
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const BookingPage = () => {
   const { roomId } = useParams();
   console.log(roomId)
@@ -34,11 +36,11 @@ const BookingPage = () => {
 
   const fetchRoomDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/room/${roomId}`);
+      const response = await fetch(`${BACKEND_URL}/room/${roomId}`);
       const data = await response.json();
       setRoom(data);
       setTotalAmount(data.rent_amount);
-      const response1 = await fetch(`http://localhost:5000/availability/${roomId}`);
+      const response1 = await fetch(`${BACKEND_URL}/availability/${roomId}`);
       const data1 = await response1.json();
       setAvailability(
         data1.bookings.map((booking) => ({
@@ -102,7 +104,7 @@ const BookingPage = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/${room.id}/book`, {
+      const response = await fetch(`${BACKEND_URL}/${room.id}/book`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -139,7 +141,7 @@ const BookingPage = () => {
             <div className="relative mb-4 h-96">
               {room.photos && room.photos.length > 0 && (
                 <img
-                  src={`http://localhost:5000${room.photos[currentImageIndex]}`}
+                  src={`${BACKEND_URL}${room.photos[currentImageIndex]}`}
                   alt={room.room_name}
                   className="object-cover w-full h-full rounded"
                 />

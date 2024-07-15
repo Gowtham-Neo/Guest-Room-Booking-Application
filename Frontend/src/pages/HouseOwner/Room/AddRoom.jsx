@@ -81,12 +81,13 @@ const AddRoom = ({ isOpen, onClose, onAddRoom, houseId }) => {
               <div className="px-4 pt-5 pb-4 bg-white sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-center">
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <Dialog.Title as="h3" className="font-serif text-xl font-medium leading-6 text-gray-900">
+                    <Dialog.Title as="h3" className="mt-10 font-serif text-xl font-medium leading-6 text-gray-900">
                       Add New Room
                     </Dialog.Title>
                     <div className="mt-2">
                       <form onSubmit={handleSubmit} className="space-y-4">
-                        <div className="flex flex-col">
+                      <div className="flex flex-wrap -mx-2">
+                        <div className="w-full px-2 md:w-1/2">
                           <label htmlFor="room_name" className="mb-2 font-medium text-gray-700">Room Name</label>
                           <input
                             type="text"
@@ -98,6 +99,7 @@ const AddRoom = ({ isOpen, onClose, onAddRoom, houseId }) => {
                             required
                           />
                         </div>
+                        <div className="w-full px-2 md:w-1/2">
 
                         <div className="flex flex-col">
                           <label htmlFor="floor_size" className="mb-2 font-medium text-gray-700">Floor Size</label>
@@ -110,6 +112,7 @@ const AddRoom = ({ isOpen, onClose, onAddRoom, houseId }) => {
                             placeholder="Floor Size"
                             required
                           />
+                        </div>
                         </div>
 
                         <div className="flex flex-col">
@@ -124,6 +127,7 @@ const AddRoom = ({ isOpen, onClose, onAddRoom, houseId }) => {
                             required
                           />
                         </div>
+                        
 
                         <div className="flex flex-col">
                           <label htmlFor="amenities" className="mb-2 font-medium text-gray-700">Amenities</label>
@@ -206,7 +210,7 @@ const AddRoom = ({ isOpen, onClose, onAddRoom, houseId }) => {
                         <div className="flex flex-col">
                           <label htmlFor="rating" className="mb-2 font-medium text-gray-700">Rating</label>
                           <input
-                            type="number"
+                            type="string"
                             id="rating"
                             value={rating}
                             onChange={(e) => setRating(e.target.value)}
@@ -233,6 +237,7 @@ const AddRoom = ({ isOpen, onClose, onAddRoom, houseId }) => {
                         >
                           Add Room
                         </button>
+                        </div>
                       </form>
                     </div>
                   </div>

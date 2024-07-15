@@ -8,13 +8,14 @@ import VerifiedRooms from "../../assets/images/VerifiedRooms.avif"
 import EasyBooking from "../../assets/images/EasyBooking.webp"
 import CustomerSupport from "../../assets/images/CustomerSupport.webp"
 import Footer from "./Footer"
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   
 
 
 
 function Home() {
     const [csrfToken,setCsrfToken]=useState(localStorage.getItem('csrfToken') || "")
-     const Login = [
+    const Login = [
     { name: "Admin Login", href: "/Ho/login" },
     { name: "Guest Login", href: "/Cu/login" },
   ];
@@ -27,7 +28,7 @@ function Home() {
     if(csrfToken == ""){
         const fetchCsrfToken = async () => {
         try {
-            const response = await fetch("http://localhost:5000/api/get-csrf-token", {
+            const response = await fetch(`${BACKEND_URL}/api/get-csrf-token`, {
                 credentials: 'include'
             });
             const data = await response.json();

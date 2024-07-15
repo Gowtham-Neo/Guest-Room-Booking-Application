@@ -9,7 +9,6 @@ const Header = () => {
 
     const Profile = [
         { name: "My Booking", href: `/booking/guest/${customer_id}` },
-        { name: "Change Password", href: "/Cu/login" },
         { name: "Logout", href: "/logout" }
       ];
 

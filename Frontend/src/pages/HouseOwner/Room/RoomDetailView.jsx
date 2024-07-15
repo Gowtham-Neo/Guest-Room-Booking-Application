@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaBed, FaRulerCombined, FaClipboardList, FaCalendarAlt,FaRupeeSign, FaDollarSign, FaRegFileAlt, FaUsers, FaStar,FaArrowLeft,FaArrowRight } from 'react-icons/fa';
 import Header from "../House/Header"
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const parseParamsFromURL = (pathname) => {
   const parts = pathname.split('/');
   const house_id = parts[2];
@@ -22,7 +24,7 @@ const RoomDetailView = () => {
     if (house_id && room_id) {
       const fetchRoomDetails = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/house/${house_id}/room/${room_id}`);
+          const response = await fetch(`${BACKEND_URL}/house/${house_id}/room/${room_id}`);
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
@@ -43,7 +45,7 @@ const RoomDetailView = () => {
 
   const deletePhoto = async (filename) => {
     try {
-      const response = await fetch(`http://localhost:5000/house/${house_id}/room/${room_id}/photo`, {
+      const response = await fetch(`${BACKEND_URL}/house/${house_id}/room/${room_id}/photo`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -97,7 +99,7 @@ const RoomDetailView = () => {
             <div className="relative mb-4 h-96">
               {room.photos && room.photos.length > 0 ? (
                 <>
-                  <img src={`http://localhost:5000${room.photos[currentImageIndex]}`} alt={`Room ${currentImageIndex + 1}`} className="object-cover w-full h-full rounded" />
+                  <img src={`${BACKEND_URL}${room.photos[currentImageIndex]}`} alt={`Room ${currentImageIndex + 1}`} className="object-cover w-full h-full rounded" />
                   <button onClick={() => deletePhoto(room.photos[currentImageIndex])} className="absolute top-0 right-0 px-2 py-1 m-2 text-sm text-white bg-red-600 rounded">
                     Delete
                   </button>

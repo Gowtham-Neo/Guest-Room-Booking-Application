@@ -12,10 +12,13 @@ import { FaRupeeSign } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { MdDashboardCustomize } from "react-icons/md";
 import { BsGraphUpArrow } from "react-icons/bs";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 
 const Dashboard = () => {
   const [houses, setHouses] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingH, setLoadingH] = useState(true);
   
   const [isAddHouseOpen, setIsAddHouseOpen] = useState(false);
   const [isUpdateHouseOpen, setIsUpdateHouseOpen] = useState(false);
@@ -52,7 +55,7 @@ const Dashboard = () => {
    
   
     try {
-      const response = await fetch(`http://localhost:5000/house/${owner_id}`);
+      const response = await fetch(`${BACKEND_URL}/house/${owner_id}`);
       const data = await response.json();
       console.log('API Response:', data); // Log the API response to check its structure
 
@@ -60,14 +63,16 @@ const Dashboard = () => {
       setHouses(data);
       console.log(houses)
       setLoading(false);
+      setLoadingH(false)
     } catch (error) {
       console.error('Error fetching houses:', error);
     }
   };
 
   const handleAddHouse = async (formData) => {
+    setLoadingH(true) 
     try {
-      const response = await fetch('http://localhost:5000/house/register', {
+      const response = await fetch(`${BACKEND_URL}/house/register`, {
         method: 'POST',
         headers: {
           'X-CSRF-Token': csrfToken
@@ -75,8 +80,9 @@ const Dashboard = () => {
         body: formData
       });
       const result = await response.json();
-      console.log('Response:', result); 
+      console.log('Response:', result);
       fetchHouses()
+      
     } catch (error) {
       console.error('Error adding house:', error);
     }
@@ -84,7 +90,7 @@ const Dashboard = () => {
 
   const handleUpdateHouse = async (houseId, updatedHouse) => {
     try {
-      const response=await fetch(`http://localhost:5000/house/${houseId}`, {
+      const response=await fetch(`${BACKEND_URL}/house/${houseId}`, {
         method: 'PUT',
         headers: {
           'X-CSRF-Token': csrfToken
@@ -94,6 +100,7 @@ const Dashboard = () => {
       const result = await response.json();
       console.log('Response:', result); 
       fetchHouses();
+      setLoadingH(true) 
     } catch (error) {
       console.error('Error updating house:', error);
     }
@@ -101,7 +108,7 @@ const Dashboard = () => {
 
   const handleDeleteHouse = async (houseId) => {
     try {
-      await fetch(`http://localhost:5000/house/${houseId}`, {
+      await fetch(`${BACKEND_URL}/house/${houseId}`, {
         method: 'DELETE',
         headers: {
           
@@ -109,15 +116,17 @@ const Dashboard = () => {
         },
       });
       fetchHouses();
+      setLoadingH(true) 
     } catch (error) {
       console.error('Error deleting house:', error);
     }
   };
 
   const handleAddRoom = async (formData) => {
+    setLoadingH(true) 
     console.log('Sending room data:', formData);
     try {
-      const response = await fetch(`http://localhost:5000/house/${houseId}/room`, {
+      const response = await fetch(`${BACKEND_URL}/house/${houseId}/room`, {
         method: 'POST',
         headers: {
           'X-CSRF-Token': csrfToken,
@@ -125,8 +134,9 @@ const Dashboard = () => {
         body: formData
       });
       const result = await response.json();
-      console.log('Response:', result); // Log response for debugging
+      console.log('Response:', result); 
       fetchHouses();
+      
     } catch (error) {
       console.error('Error adding room:', error);
     }
@@ -134,7 +144,7 @@ const Dashboard = () => {
   
   const handleUpdateRoom = async ( formData) => {
     try {
-      const response = await fetch(`http://localhost:5000/house/${houseId}/room/${roomId}`, {
+      const response = await fetch(`${BACKEND_URL}/house/${houseId}/room/${roomId}`, {
         method: 'PUT',
         headers: {
           'X-CSRF-Token': csrfToken,
@@ -142,8 +152,9 @@ const Dashboard = () => {
         body: formData,
       });
       const result = await response.json();
-      console.log('Response:', result); // Log response for debugging
+      console.log('Response:', result); 
       fetchHouses();
+      setLoadingH(true) 
     } catch (error) {
       console.error('Error updating room:', error);
     }
@@ -152,13 +163,14 @@ const Dashboard = () => {
 
   const handleDeleteRoom = async (houseId, roomId) => {
     try {
-      await fetch(`http://localhost:5000/house/${houseId}/room/${roomId}`, {
+      await fetch(`${BACKEND_URL}/house/${houseId}/room/${roomId}`, {
         method: 'DELETE',
         headers: {
           'X-CSRF-Token': csrfToken
         },
       });
       fetchHouses();
+      setLoadingH(true) 
     } catch (error) {
       console.error('Error deleting room:', error);
     }
@@ -238,7 +250,7 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <div className="flex-1 p-6 ml-64">
-        <h2 className="mb-6 text-2xl font-bold">Houses:</h2>
+        <h2 className="mt-16 mb-6 text-2xl font-bold">Houses:</h2>
         
        {houses.map((house) => (
         <div key={house.id} className="mb-6">
@@ -332,6 +344,7 @@ const Dashboard = () => {
           </div>
         </div>
       ))}
+      {loadingH && (<p className="mb-8 text-xl">Fetching...</p>)}
       <button
           className="px-4 py-2 mb-10 font-bold text-white bg-green-500 rounded"
           onClick={() => setIsAddHouseOpen(true)}

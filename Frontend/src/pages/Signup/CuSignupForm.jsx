@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import signup from "../../assets/images/signup.avif";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const CuSignupForm = () => {
     const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ const CuSignupForm = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/Cu/signup`, {
+      const response = await fetch(`${BACKEND_URL}/Cu/signup`, {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
