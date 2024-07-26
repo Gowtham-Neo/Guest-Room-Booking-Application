@@ -16,6 +16,17 @@ const HoSigninForm = () => {
       setError("Please fill in both fields.");
       return;
     }
+
+
+    if ( !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError("Please enter a valid email address.");
+      return ;
+    }
+
+    if (!password.length>=8) {
+      setError("Password should be at least 8 characters long.");
+      return;
+    }
     const csrfToken = localStorage.getItem('csrfToken');
     console.log(csrfToken)
     try {

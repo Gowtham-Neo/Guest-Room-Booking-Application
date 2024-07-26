@@ -8,6 +8,10 @@ router.post('/:roomId/book', async (req, res) => {
     const room_id =req.params.roomId
   const { check_in_date, check_out_date, total_amount,customer_id, } = req.body;
 
+  const currentDate = new Date().setHours(0, 0, 0, 0);
+  const checkInDate = new Date(check_in_date).setHours(0, 0, 0, 0);
+  const checkOutDate = new Date(check_out_date).setHours(0, 0, 0, 0);
+
   try {
     // Ensure room is available for the requested dates
     const room = await Room.findOne({
@@ -30,6 +34,10 @@ router.post('/:roomId/book', async (req, res) => {
 
     if (room.Bookings.length > 0) {
       return res.status(400).json({ message: 'Room is not available for the selected dates' });
+    }
+
+    if (checkInDate < currentDate || checkOutDate < currentDate) {
+      return res.status(400).json({ message: 'Booking dates must be from the current date onward' });
     }
 
     const newBooking = await Booking.create({

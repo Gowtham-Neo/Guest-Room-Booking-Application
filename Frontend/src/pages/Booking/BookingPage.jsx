@@ -98,7 +98,7 @@ const BookingPage = () => {
     const stayDuration = (selectedCheckOutDate - selectedCheckInDate) / (1000 * 60 * 60 * 24);
 
     if (stayDuration < minStay || stayDuration > maxStay) {
-      setError(`Stay duration must be between ${minStay} and ${maxStay} nights.`);
+      setError(`Stay duration must be between ${minStay} and ${maxStay}.`);
       setBookingStatus('');
       return;
     }
@@ -112,18 +112,22 @@ const BookingPage = () => {
         },
         body: JSON.stringify({ check_in_date, check_out_date, customer_id, total_amount }),
       });
-
+      
       if (!response.ok) {
         throw new Error('Failed to book room');
       }
-
+      
       setBookingStatus('Booked successful!');
-      setError('');
+      setTimeout(()=>{
+        setBookingStatus('');
+        
+      },4000)
+      setError("");
       fetchRoomDetails(); 
       console.log(await response.json())
     } catch (error) {
       console.error('Error booking room:', error);
-      setError('Failed to book room');
+      setError("Book Room from current date");
       setBookingStatus('');
     }
   };

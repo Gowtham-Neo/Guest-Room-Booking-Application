@@ -11,6 +11,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 const GuestRoomBooking = () => {
   const [houses, setHouses] = useState([]);
   const [rooms, setRooms] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentImageIndexH, setCurrentImageIndexH] = useState({});
   const [currentImageIndexR, setCurrentImageIndexR] = useState({});
@@ -38,6 +39,7 @@ const GuestRoomBooking = () => {
       const data = await response.json();
       setRooms(data);
       setCurrentImageIndexR(data.reduce((acc, room) => ({ ...acc, [room.id]: 0 }), {}));
+      setLoading(false)
     } catch (error) {
       console.error('Error fetching rooms:', error);
     }
@@ -146,9 +148,19 @@ const GuestRoomBooking = () => {
                     </button>
                   </div>
                 ))}
-                {filteredHouses=="" && (
-                    <p className='text-2xl font-bold'>No Houses available!</p>
-                )}
+                {loading ? (
+                    <div>
+                        <p className='text-2xl font-bold'>Loading...!</p>
+                    </div>
+                ) : filteredHouses === "" ? (
+                    <div>
+                        <p className='text-2xl font-bold'>No Houses found!</p>
+                    </div>
+                ) : (
+                    <div>
+                      
+                    </div>
+                )};
               </div>
             </div>
 
@@ -187,11 +199,21 @@ const GuestRoomBooking = () => {
 
                   </div>
                 ))}
-                {filteredRooms=="" && (
-                    <p className='text-2xl font-bold'>No rooms available!</p>
-                )}
+               {loading ? (
+                    <div>
+                        <p className='text-2xl font-bold'>Loading...!</p>
+                    </div>
+                ) : filteredRooms === "" ? (
+                    <div>
+                        <p className='text-2xl font-bold'>No rooms found!</p>
+                    </div>
+                ) : (
+                    <div>
+                      
+                    </div>
+                )};
               </div>
-            </div>
+            </div>  
           </div>
         </div>
       </div>

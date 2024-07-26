@@ -19,6 +19,29 @@ const HoSignupForm = () => {
       setError("Please fill all the fields.");
       return;
     }
+
+    if (!/^[a-zA-Z\s]+$/.test(name)) {
+      setError("Name should be in text format.");
+      return;
+    }
+
+    if ( !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError("Please enter a valid email address.");
+      return ;
+    }
+
+
+    if (!/^\d+$/.test(number)) {
+      setError("Please enter a valid number.");
+      return;
+    }
+
+    if (!password.length>=8) {
+      setError("Password should be at least 8 characters long.");
+      return;
+    }
+  
+
     const csrfToken = localStorage.getItem('csrfToken');
     console.log(csrfToken)
     try {

@@ -17,6 +17,18 @@ const CuSigninForm = () => {
       setError("Please fill in both fields.");
       return;
     }
+
+
+
+    if ( !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError("Please enter a valid email address.");
+      return ;
+    }
+
+    if (!password.length>=8) {
+      setError("Password should be at least 8 characters long.");
+      return;
+    }
     try {
       const response = await fetch(`${BACKEND_URL}/Cu/login`, {
         method: "POST",

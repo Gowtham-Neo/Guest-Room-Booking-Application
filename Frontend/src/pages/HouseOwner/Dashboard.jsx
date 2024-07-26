@@ -2,16 +2,20 @@ import { Fragment, useState, useEffect } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import classNames from 'classnames';
+
 import AddHouse from './House/AddHouse';
 import UpdateHouse from './House/UpdateHouse';
+
 import AddRoom from './Room/AddRoom';
 import UpdateRoom from './Room/UpdateRoom';
+
 import { GiHouse } from "react-icons/gi";
 import { HiLocationMarker } from "react-icons/hi";
 import { FaRupeeSign } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { MdDashboardCustomize } from "react-icons/md";
 import { BsGraphUpArrow } from "react-icons/bs";
+
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 
@@ -51,9 +55,6 @@ const Dashboard = () => {
     { name: "Log Out", href: "/logout" },
   ];
   const fetchHouses = async () => {
-    
-   
-  
     try {
       const response = await fetch(`${BACKEND_URL}/house/${owner_id}`);
       const data = await response.json();
@@ -63,15 +64,15 @@ const Dashboard = () => {
       setHouses(data);
       console.log(houses)
       setLoading(false);
-      setLoadingH(false)
+      setLoadingH(false);
     } catch (error) {
       console.error('Error fetching houses:', error);
     }
   };
 
   const handleAddHouse = async (formData) => {
-    setLoadingH(true) 
     try {
+      setLoadingH(true) 
       const response = await fetch(`${BACKEND_URL}/house/register`, {
         method: 'POST',
         headers: {
@@ -90,6 +91,7 @@ const Dashboard = () => {
 
   const handleUpdateHouse = async (houseId, updatedHouse) => {
     try {
+      setLoadingH(true) 
       const response=await fetch(`${BACKEND_URL}/house/${houseId}`, {
         method: 'PUT',
         headers: {
@@ -100,7 +102,6 @@ const Dashboard = () => {
       const result = await response.json();
       console.log('Response:', result); 
       fetchHouses();
-      setLoadingH(true) 
     } catch (error) {
       console.error('Error updating house:', error);
     }
@@ -108,6 +109,7 @@ const Dashboard = () => {
 
   const handleDeleteHouse = async (houseId) => {
     try {
+      setLoadingH(true) 
       await fetch(`${BACKEND_URL}/house/${houseId}`, {
         method: 'DELETE',
         headers: {
@@ -116,16 +118,15 @@ const Dashboard = () => {
         },
       });
       fetchHouses();
-      setLoadingH(true) 
     } catch (error) {
       console.error('Error deleting house:', error);
     }
   };
 
   const handleAddRoom = async (formData) => {
-    setLoadingH(true) 
     console.log('Sending room data:', formData);
     try {
+      setLoadingH(true) 
       const response = await fetch(`${BACKEND_URL}/house/${houseId}/room`, {
         method: 'POST',
         headers: {
@@ -144,6 +145,7 @@ const Dashboard = () => {
   
   const handleUpdateRoom = async ( formData) => {
     try {
+      setLoadingH(true) 
       const response = await fetch(`${BACKEND_URL}/house/${houseId}/room/${roomId}`, {
         method: 'PUT',
         headers: {
@@ -154,7 +156,6 @@ const Dashboard = () => {
       const result = await response.json();
       console.log('Response:', result); 
       fetchHouses();
-      setLoadingH(true) 
     } catch (error) {
       console.error('Error updating room:', error);
     }
@@ -163,6 +164,7 @@ const Dashboard = () => {
 
   const handleDeleteRoom = async (houseId, roomId) => {
     try {
+      setLoadingH(true) 
       await fetch(`${BACKEND_URL}/house/${houseId}/room/${roomId}`, {
         method: 'DELETE',
         headers: {
@@ -170,7 +172,6 @@ const Dashboard = () => {
         },
       });
       fetchHouses();
-      setLoadingH(true) 
     } catch (error) {
       console.error('Error deleting room:', error);
     }
@@ -247,6 +248,8 @@ const Dashboard = () => {
           </li>
         </ul>
       </div>
+
+      {loadingH&& (<p className="fixed z-50 px-6 py-4 mb-8 font-serif text-xl font-semibold text-white bg-green-600 border border-black top-8 right-10">Updating......</p>)}
 
       {/* Main Content */}
       <div className="flex-1 p-6 ml-64">
